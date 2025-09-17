@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+@import 'basecoat-css';
+
+/* 
+UTILITIES
+A collection of single-purpose utility classes.
+*/
+
+/* Wrapper */
+@utility wrapper {
+	--wrapper-max-w: var(--container-4xl);
+	--wrapper-px: --spacing(4);
+
+	@apply relative mx-auto max-w-[var(--wrapper-max-w)] px-[var(--wrapper-px)];
+}
+@utility wrapper-* {
+	--wrapper-max-w: --value(--container-*);
+}
+@utility wrapper-px-* {
+	--wrapper-px: --spacing(--value(number));
+	--wrapper-px: --value(--spacing-*, [*]);
+}
+
+/* Cluster */
+@utility cluster {
+	--cluster-gap: --spacing(4);
+
+	@apply flex flex-wrap items-center justify-start gap-[var(--cluster-gap)];
+}
+@utility cluster-* {
+	--cluster-gap: --spacing(--value(number));
+	--cluster-gap: --value(--spacing-*, [*]);
+}
+
+/* Repel */
+@utility repel {
+	@apply flex flex-wrap items-center justify-between gap-4;
+}
+
+/* Stack */
+@utility stack {
+	> :where(:not(.stack-ignore)) + :where(:not(.stack-ignore)) {
+		--stack-space: 1em;
+		@apply mt-[var(--stack-space)];
+	}
+}
+@utility stack-* {
+	> :where(:not(.stack-ignore)) + :where(:not(.stack-ignore)) {
+		--stack-space: --spacing(--value(number));
+		--stack-space: --value(--spacing-*, [*]);
+	}
+}
+@utility stack-child-* {
+	--stack-space: --spacing(--value(number));
+	--stack-space: --value(--spacing-*, [*]);
+}
+@utility stack-ignore {
+	@apply mt-0 contents;
+}
+
+/* Switcher */
+@utility switcher {
+	--switcher-width: 40rem;
+	--switcher-gap: --spacing(4);
+
+	@apply flex flex-wrap items-start gap-[var(--switcher-gap)];
+
+	> * {
+		@apply grow;
+		flex-basis: calc((var(--switcher-width) - 100%) * 999);
+	}
+
+	> :nth-last-child(n + 5),
+	> :nth-last-child(n + 5) ~ * {
+		@apply basis-full;
+	}
+}
+@utility switcher-* {
+	--switcher-width: --value(--container-*, [*]);
+}
+@utility switcher-gap-* {
+	--switcher-gap: --spacing(--value(number));
+	--switcher-gap: --value(--spacing-*, [*]);
+}
+
+/* Frame */
+@utility frame-* {
+	@apply flex items-center justify-center overflow-hidden;
+	aspect-ratio: --value(--aspect-*);
+
+	> *,
+	> img,
+	> video {
+		@apply h-full w-full object-cover;
+	}
+}
+
+/* Stretch Link */
+@utility stretch-link {
+	&::after {
+		@apply absolute inset-0 z-10 content-[''];
+	}
+}
+
+/* Bleed */
+@utility bleed-full {
+	@apply ml-[50%] w-screen -translate-x-1/2;
+}
+@utility bleed-right {
+	width: calc(50% + 50vw);
+	width: calc(50% + 50cqw);
+}
+@utility bleed-left {
+	width: calc(50% + 50vw);
+	width: calc(50% + 50cqw);
+	margin-left: calc(50% - 50vw);
+	margin-left: calc(50% - 50cqw);
+}
+
+/* Skip Link */
+@utility skip-link {
+	@apply absolute top-4 left-4 z-[999] block size-px overflow-hidden p-4;
+	clip: rect(1px, 1px, 1px, 1px);
+
+	&:focus {
+		@apply h-auto w-auto overflow-visible;
+		clip: auto;
+	}
+
+	&:not(:focus) {
+		@apply absolute m-0 h-auto w-px overflow-hidden border-none p-0 whitespace-nowrap;
+		clip: rect(0 0 0 0);
+	}
+}
+
+/* Reel */
+@utility reel {
+	@apply flex h-auto snap-x gap-4 overflow-hidden overflow-x-auto;
+	-webkit-overflow-scrolling: touch;
+
+	> * {
+		@apply shrink-0;
+	}
+
+	> img {
+		@apply h-full w-auto;
+	}
+}
+@utility reel-snap-start {
+	@apply snap-mandatory;
+
+	> * {
+		@apply snap-start;
+	}
+}
+@utility reel-snap-center {
+	@apply snap-mandatory;
+
+	> * {
+		@apply snap-center;
+	}
+}
