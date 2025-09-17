@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { authClient } from '$lib/auth-client';
+	import { authClient } from '$lib/auth/client';
 
-	let email = 'test@email.com';
-	let password = 'password';
+	let email = $state<string>('test@email.com');
+	let password = $state<string>('password');
+	let errorMessage = $state<string | null>(null);
 
 	async function handleSubmit(event: SubmitEvent) {
 		event?.preventDefault();
@@ -15,10 +16,11 @@
 				},
 				{
 					onSuccess: () => {
-						window.location.href = '/';
+						window.location.href = '/dashboard';
 					},
 					onError: (context) => {
 						console.error('Sign in failed:', context.error.message);
+						errorMessage = context.error.message;
 					}
 				}
 			);
@@ -27,6 +29,10 @@
 		}
 	}
 </script>
+
+{#if errorMessage}
+	<p class="text-sm text-red-500">{errorMessage}</p>
+{/if}
 
 <form class="stack" onsubmit={handleSubmit}>
 	<div class="grid gap-2">

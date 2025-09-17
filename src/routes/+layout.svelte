@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Header from '$/components/header.svelte';
 	import '../app.css';
 
 	let { children } = $props();
@@ -6,8 +7,10 @@
 
 <svelte:head></svelte:head>
 
+<Header />
+
 <main class="py-24">
-	<div class="wrapper wrapper-2xl">
+	<div class="wrapper">
 		{@render children?.()}
 	</div>
 </main>

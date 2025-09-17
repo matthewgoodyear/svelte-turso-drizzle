@@ -56,3 +56,17 @@
 
 - **Local dev** → use `push` for speed.
 - **Prod** → always use `migrate` so history is tracked.
+
+---
+
+**Port in use fix**
+
+- Kill the old process
+  On macOS/Linux:
+  ```bash
+    lsof -i :8080
+  ```
+- Find the PID (first column), then:
+  ```bash
+     kill -9 <PID>
+  ```

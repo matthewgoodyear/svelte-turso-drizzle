@@ -8,7 +8,7 @@ A collection of single-purpose utility classes.
 
 /* Wrapper */
 @utility wrapper {
-	--wrapper-max-w: var(--container-4xl);
+	--wrapper-max-w: var(--container-2xl);
 	--wrapper-px: --spacing(4);
 
 	@apply relative mx-auto max-w-[var(--wrapper-max-w)] px-[var(--wrapper-px)];

@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { authClient } from '$lib/auth-client';
+	import { authClient } from '$lib/auth/client';
 
-	let name = 'Joe Blogger';
-	let email = 'test@email.com';
-	let password = 'password';
+	let name = $state<string>('Joe Blogger');
+	let email = $state<string>('test@email.com');
+	let password = $state<string>('password');
+	let errorMessage = $state<string | null>(null);
 
 	async function handleSubmit(event: SubmitEvent) {
 		event?.preventDefault();
@@ -21,6 +22,7 @@
 					},
 					onError: (context) => {
 						console.error('Sign up failed:', context.error.message);
+						errorMessage = context.error.message;
 					}
 				}
 			);
@@ -29,6 +31,10 @@
 		}
 	}
 </script>
+
+{#if errorMessage}
+	<p class="text-sm text-red-500">{errorMessage}</p>
+{/if}
 
 <form class="stack" onsubmit={handleSubmit}>
 	<div class="grid gap-2">

@@ -2,10 +2,15 @@
 	import type { Snippet } from 'svelte';
 	import type { LayoutData } from './$types';
 
-	let { data, children }: { data: LayoutData; children: Snippet } = $props();
+	type Props = {
+		data: LayoutData;
+		children: Snippet;
+	};
+
+	let { data, children }: Props = $props();
 </script>
 
-<div class="stack">
+<div class="stack stack-8">
 	<h1 class="text-4xl font-bold">Dashboard Layout</h1>
 	<div class="flex items-center gap-2">
 		This is a protected layout:
