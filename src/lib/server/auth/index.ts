@@ -10,6 +10,8 @@ export const auth = betterAuth({
 	}),
 	plugins: [sveltekitCookies(getRequestEvent)],
 	emailAndPassword: {
-		enabled: true
+		enabled: true,
+		autoSignIn: false,
+		requireEmailVerification: false
 	}
 });
